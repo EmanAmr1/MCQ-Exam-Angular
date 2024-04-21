@@ -15,18 +15,13 @@
       "id": 1
     }
   ],
-
-"subject":[
-
-  {
-    "questions":[],
-    "name":"",
-    "id":""
-  }
-],
-
-
-
+  "subject": [
+    {
+      "questions": [],
+      "name": "",
+      "id": ""
+    }
+  ],
   "login": [
     {
       "username": "admin",

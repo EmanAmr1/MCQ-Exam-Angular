@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DoctorModule } from '../../doctor.module';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-new-exam',
@@ -8,14 +10,18 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class NewExamComponent implements OnInit {
 
-  subjectName =new FormControl
+  subjectName =new FormControl("")
+  subjectValue=""
   questionsForm!:FormGroup
 
   correctAnswer:any
-
+  stepperIndex=0;
   questionsArr:any[]=[]
+  preview:boolean=false
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder , private service:DoctorService) { }
+
+startAdd:boolean=false
 
   ngOnInit(): void {
     this.createform()
@@ -63,10 +69,73 @@ console.log(this.questionsArr)
 }
 
 
-submit(){
-  const model ={
+start(){
+  if(this.subjectName.value == ""){
+    alert("ادخل اسم المادة")
 
-  }
+}else{
+
+  this.startAdd=true
+  this.subjectValue = this.subjectName.value
+
 }
+
+if(this.startAdd){
+  this.stepperIndex=1
+}
+
+}
+
+
+
+clearform(){
+  this.questionsForm.reset()
+}
+
+cancel(){
+  this.questionsForm.reset()
+  this.questionsArr=[]
+  this.subjectValue=""
+this.subjectName.reset()
+this.stepperIndex=0
+this.startAdd=false
+
+}
+
+/*submit(){
+  const model ={
+subjectName:this.subjectName,
+questionsArr:this.questionsArr
+  }
+  this.service.createSubject(model).subscribe(res=>{
+this.preview=true;
+
+  })
+  if(this.preview){
+    this.stepperIndex=2
+  }
+
+
+}*/
+
+
+submit() {
+  const model = {
+    subjectName: this.subjectName,
+    questionsArr: this.questionsArr
+  };
+
+  this.service.createSubject(model).subscribe(res => {
+    this.preview = true;
+    if (this.preview) {
+      this.stepperIndex = 2;
+    }
+  });
+}
+
+
+
+
+
 
 }
