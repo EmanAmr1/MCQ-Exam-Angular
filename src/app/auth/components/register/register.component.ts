@@ -36,7 +36,7 @@ createForm(){
 }
 
 getStudents(){
-  this.service.getUsers().subscribe((res:any)=>{
+  this.service.getUsers("students").subscribe((res:any)=>{
     this.studentsArr =res
   }
   )
