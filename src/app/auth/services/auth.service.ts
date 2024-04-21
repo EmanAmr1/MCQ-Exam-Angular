@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
@@ -7,20 +8,21 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+user = new Subject()
 
-  constructor(private http:HttpClient) {
-  }
+  constructor(private http:HttpClient) {}
 
   createUser(model:any){
     return this.http.post(environment.baseApi+'students',model)}
 
-
   getUsers(type:string){
-    return this.http.get(environment.baseApi+type)
-  }
+    return this.http.get(environment.baseApi+type) }
 
-login(model:any){
-  return this.http.put(environment.baseApi +"login/1",model)
+  login(model:any){
+    return this.http.put(environment.baseApi +"login/1",model)}
+
+getRole(){
+  return this.http.get(environment.baseApi+"login/1")
 }
 
 }

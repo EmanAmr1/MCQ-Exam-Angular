@@ -16,9 +16,10 @@ export class LoginComponent implements OnInit {
   type:string= "students"
 
     constructor(private fb:FormBuilder,private service:AuthService , private router:Router) { }
+
   ngOnInit(): void {
     this.getUsers();
-this.createForm()
+    this.createForm()
   }
 
   createForm(){
@@ -27,9 +28,6 @@ this.createForm()
         type:this.type,
         email:['',[Validators.required , Validators.email]],
         password:['',[Validators.required]],
-
-
-
       }
     )
   }
@@ -52,29 +50,23 @@ getRole(event:any){
 
 
   submit(){
-
-
     //check email and password
   let index =this.usersArr.findIndex(item=> item.email == this.LoginForm.value.email && item.password == this.LoginForm.value.password)
-
   if(index == -1){
-
     alert("الايميل او كلمه المرور غير صحيح")
   }
   else
   {
-const model={
+
+  const model={
   username:this.usersArr[index].username,
   role:this.type
-}
-
+     }
     this.service.login(model).subscribe(res =>{
+      this.service.user.next(res)
       alert("تم دخول الحساب بنجاح")
       this.router.navigate(['/subjects'])
     })
   }
   }
-
-
-
 }
