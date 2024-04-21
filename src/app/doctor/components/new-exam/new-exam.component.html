@@ -6,7 +6,7 @@
                 <div>اسم المادة : </div>
                 <mat-form-field appearance="fill" color="warn">
                     <mat-label>اسم المادة</mat-label>
-                    <input matInput type="text"  >
+                    <input matInput type="text"  [formControl]="subjectName">
                 </mat-form-field>
                 <button color="warn"  mat-raised-button matStepperNext>ابدأ</button>
             </div>
@@ -14,56 +14,56 @@
         </mat-step>
         <mat-step label="اسئلة اللغة العربية" completed="true">
             <div class="question">
-                <form >
+                <form [formGroup]="questionsForm" >
                     <mat-form-field appearance="outline" color="warn" class="queiz">
                         <mat-label>السؤال</mat-label>
-                        <input matInput type="text"  >
+                        <input matInput type="text" formControlName="question" >
                     </mat-form-field>
 
                 <div class="row">
                         <div class="col-md-6 col-sm-12">
-                        <mat-radio-button value="answer1"  color="warn"></mat-radio-button>
+                        <mat-radio-button value="answer1"  color="warn"  (change)="getCorrectAnswer($event)" ></mat-radio-button>
                             <mat-form-field color="warn">
                                 <mat-label>أجابة A</mat-label>
-                                <input matInput type="text"  >
+                                <input matInput type="text" formControlName="answer1" >
                             </mat-form-field>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
-                        <mat-radio-button value="answer2"  color="warn"></mat-radio-button>
+                        <mat-radio-button value="answer2"  color="warn" (change)="getCorrectAnswer($event)" ></mat-radio-button>
                             <mat-form-field color="warn">
                                 <mat-label>أجابة B</mat-label>
-                                <input matInput type="text"  >
+                                <input matInput type="text" formControlName="answer2" >
                             </mat-form-field>
-                        
+
                         </div>
 
                         <div class="col-md-6 col-sm-12">
-                        <mat-radio-button value="answer3"  color="warn"></mat-radio-button>
+                        <mat-radio-button value="answer3"  color="warn" (change)="getCorrectAnswer($event)" ></mat-radio-button>
                         <mat-form-field color="warn">
                                 <mat-label>أجابة C</mat-label>
-                                <input matInput type="text"   >
+                                <input matInput type="text"  formControlName="answer3" >
                             </mat-form-field>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
-                            <mat-radio-button value="answer4" color="warn"></mat-radio-button>
+                            <mat-radio-button value="answer4" color="warn" (change)="getCorrectAnswer($event)" ></mat-radio-button>
                             <mat-form-field color="warn">
                                 <mat-label>أجابة D</mat-label>
-                                <input matInput type="text"  >
+                                <input matInput type="text" formControlName="answer4" >
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="questBtn">
                         <div>
-                            <button mat-raised-button class="btn btn-success" matStepperNext >انتهاء</button>
+                            <button mat-raised-button class="btn btn-success"  (click)="submit()" matStepperNext >انتهاء</button>
                             <button mat-raised-button color="warn" matStepperPrevious >الغاء</button>
                         </div>
                         <div>
                             <button mat-raised-button color="accent">حذف </button>
-                            <button mat-raised-button color="primary" >حفظ</button>
+                            <button mat-raised-button color="primary" [disabled]="questionsForm.invalid"  (click)="createQuestion()">حفظ</button>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>
@@ -75,7 +75,7 @@
                     <strong><span class="text-danger">سؤال 1</span> .  test</strong>
                     <div class="row" dir="rtl">
                         <div class="col-sm-12">
-                            A. تيست 
+                            A. تيست
                         </div>
                         <div class="col-sm-12">
                             B. تيست
