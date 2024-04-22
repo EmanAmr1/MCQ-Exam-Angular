@@ -19,4 +19,12 @@ updateSubject(model:any , id:number){
 }
 
 
+getAllSubjects(){
+  return this.http.get(environment.baseApi+'subject')
+}
+
+
+deleteSubject(id:number){
+return this.http.delete(environment.baseApi+'subject/' + id)
+}
 }
