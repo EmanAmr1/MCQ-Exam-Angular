@@ -24,6 +24,10 @@ getAllSubjects(){
 }
 
 
+getSubjectById(id:number){
+  return this.http.get(environment.baseApi+'subject/'+id)
+}
+
 deleteSubject(id:number){
 return this.http.delete(environment.baseApi+'subject/' + id)
 }

@@ -1,7 +1,7 @@
 
             <div class="subjectBox">
                 <div class="row">
-                    <div class="col-md-3 col-sm-12" *ngFor="let i of subjectsArr; let n=index">
+                    <div class="col-md-3 col-sm-12" *ngFor="let i of subjectsArr; let n=index" routerLink="/exam/{{i.id}}">
                         <div class="namesubject">
                             <div>{{i.subjectValue}}</div>
                         </div>
