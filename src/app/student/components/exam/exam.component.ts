@@ -13,6 +13,10 @@ export class ExamComponent implements OnInit {
   id:any
   subject:any
 user:any
+
+total:number=0
+showResult:boolean=false
+
   constructor(private route:ActivatedRoute , private service:DoctorService , private auth:AuthService) {
 
   this.id= this.route.snapshot.paramMap.get('id')
@@ -53,8 +57,28 @@ user:any
 
   }
 
+ getAnswer(event:any){
+  let stuValue = event.value, // the selected value by student
+      questionIndex = event.source.name //save q index
+console.log(questionIndex)
+
+  this.subject.questionsArr[questionIndex].studentAnswer = stuValue //make studentAnswer variable to set to it the value
+console.log(event)
+console.log(this.subject.questionsArr)
+ }
 
 
 
+ result(){
+  this.total=0
+  this.showResult=true
+for (let  x in this.subject.questionsArr)
+  {
+    if(this.subject.questionsArr[x].studentAnswer == this.subject.questionsArr[x].correctAnswer){
+      this.total+=1
+    }
+  }
+  console.log("t"+this.total)
+ }
 
 }
