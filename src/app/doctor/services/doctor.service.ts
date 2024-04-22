@@ -10,7 +10,13 @@ export class DoctorService {
   constructor(private http:HttpClient) { }
 
   createSubject(model:any){
-    return this.http.post(environment.baseApi+'subjects',model)
+    return this.http.post(environment.baseApi+'subject',model)
 
   }
+
+updateSubject(model:any , id:number){
+  return this.http.put(environment.baseApi+"subject/"+id , model)
+}
+
+
 }

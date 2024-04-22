@@ -18,10 +18,12 @@ export class NewExamComponent implements OnInit {
   stepperIndex=0;
   questionsArr:any[]=[]
   preview:boolean=false
+  startAdd:boolean=false
 
+  questionId:any
   constructor(private fb:FormBuilder , private service:DoctorService) { }
 
-startAdd:boolean=false
+
 
   ngOnInit(): void {
     this.createform()
@@ -102,37 +104,38 @@ this.startAdd=false
 
 }
 
-/*submit(){
+submit(){
   const model ={
-subjectName:this.subjectName,
+subjectValue:this.subjectValue,
 questionsArr:this.questionsArr
   }
-  this.service.createSubject(model).subscribe(res=>{
-this.preview=true;
 
-  })
   if(this.preview){
     this.stepperIndex=2
+  }else {
+    this.service.createSubject(model).subscribe((res:any)=>{
+      this.preview=true;
+this.questionId=res.id
+        })
   }
 
 
-}*/
-
-
-submit() {
-  const model = {
-    subjectName: this.subjectName,
-    questionsArr: this.questionsArr
-  };
-
-  this.service.createSubject(model).subscribe(res => {
-    this.preview = true;
-    if (this.preview) {
-      this.stepperIndex = 2;
-    }
-  });
 }
 
+
+delete(index:number){
+
+  this.questionsArr.splice(index,1) //delete
+  const model ={ //then send new model without deleted item
+    subjectValue:this.subjectValue,
+    questionsArr:this.questionsArr
+      }
+
+      this.service.updateSubject(model,this.questionId).subscribe((res)=>{
+        alert("تم حذف السؤال بنجاح")
+      })
+
+}
 
 
 
