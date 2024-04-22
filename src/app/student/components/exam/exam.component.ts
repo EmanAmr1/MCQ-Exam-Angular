@@ -13,16 +13,17 @@ export class ExamComponent implements OnInit {
   id:any
   subject:any
 user:any
-
+stuInfo:any
 total:number=0
 showResult:boolean=false
-
+userSubjects:any[]=[]
   constructor(private route:ActivatedRoute , private service:DoctorService , private auth:AuthService) {
 
   this.id= this.route.snapshot.paramMap.get('id')
   this.getSubjectById()
   console.log(this.id)
   this.getUserRole()
+
   }
   ngOnInit(): void {
 
@@ -53,8 +54,16 @@ showResult:boolean=false
   getUserRole(){
     this.auth.getRole().subscribe(res=>{
   this.user=res
+this.getUserData()
     })
 
+  }
+
+  getUserData(){
+    this.auth.getStudent(this.user.userId).subscribe((res:any)=>{
+      this.stuInfo=res
+      this.userSubjects=res?.subjects ? res?.subject :[]
+    })
   }
 
  getAnswer(event:any){
@@ -77,8 +86,32 @@ for (let  x in this.subject.questionsArr)
     if(this.subject.questionsArr[x].studentAnswer == this.subject.questionsArr[x].correctAnswer){
       this.total+=1
     }
+
+
   }
+this.userSubjects.push({
+  name:this.subject.subjectValue,
+  id:this.id,
+  degree:this.total
+
+})
+  const model={
+    username: this.stuInfo.username,
+    email:this.stuInfo.email ,
+    password: this.stuInfo.password,
+    subjectsArr:this.userSubjects
+  }
+  this.auth.updateStudent(this.user.userId, model).subscribe(res=>{
+    alert("تم تسجيل النتيجه بنجاح")
+  })
   console.log("t"+this.total)
  }
+
+
+
+
+
+
+
 
 }

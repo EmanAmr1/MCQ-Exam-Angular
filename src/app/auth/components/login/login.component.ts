@@ -60,6 +60,7 @@ getRole(event:any){
 
   const model={
   username:this.usersArr[index].username,
+  userId:this.usersArr[index].id,
   role:this.type
      }
     this.service.login(model).subscribe(res =>{
