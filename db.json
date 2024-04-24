@@ -85,9 +85,9 @@
   ],
   "login": [
     {
-      "username": "mekii",
-      "userId": 7,
-      "role": "students",
+      "username": "admin",
+      "userId": 1,
+      "role": "doctor",
       "id": 1
     }
   ]
