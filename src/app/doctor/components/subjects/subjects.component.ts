@@ -11,7 +11,7 @@ export class SubjectsComponent implements OnInit {
 
   user:any={}
   subjectsArr:any[]=[]
-
+ 
   constructor(private service:DoctorService ,private auth:AuthService) { }
 
   ngOnInit(): void {
@@ -41,6 +41,15 @@ this.service.deleteSubject(id).subscribe(res=>{
   alert("تم الحذف بنجاح")
 
 })}
+
+
+
+
+
+
+
+
+
 
 
 }

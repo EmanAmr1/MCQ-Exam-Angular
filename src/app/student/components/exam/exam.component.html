@@ -4,22 +4,22 @@
         <strong ><span class="text-danger">سؤال {{n+1}}: </span>  {{i.question}}</strong>
         <div class="row mt-3" >
             <div class="col-md-6 col-sm-12">
-                <mat-radio-button value="{{i.answer1}}" [hidden]="showResult" (change)="getAnswer($event)" color="warn" *ngIf="user?.role == 'students'" name="{{n}}"></mat-radio-button>
+                <mat-radio-button value="{{i.answer1}}" [hidden]="showResult" (change)="getAnswer($event)" color="warn" *ngIf="user?.role == 'students' && validExam " name="{{n}}"></mat-radio-button>
                 <label>{{i.answer1}} (A)</label>
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <mat-radio-button value="{{i.answer2}}"[hidden]="showResult" (change)="getAnswer($event)" color="warn" *ngIf="user?.role == 'students'"  name="{{n}}"></mat-radio-button>
+                <mat-radio-button value="{{i.answer2}}"[hidden]="showResult" (change)="getAnswer($event)" color="warn" *ngIf="user?.role == 'students'  && validExam  "  name="{{n}}"></mat-radio-button>
                 <label> {{i.answer2}}  (B)</label>
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <mat-radio-button value="{{i.answer3}}"  [hidden]="showResult" (change)="getAnswer($event)" color="warn" *ngIf="user?.role == 'students'"  name="{{n}}"></mat-radio-button>
+                <mat-radio-button value="{{i.answer3}}"  [hidden]="showResult" (change)="getAnswer($event)" color="warn" *ngIf="user?.role == 'students' && validExam  "  name="{{n}}"></mat-radio-button>
                 <label> {{i.answer3}}  (C) </label>
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <mat-radio-button value="{{i.answer4}}"   [hidden]="showResult"  (change)="getAnswer($event)"    color="warn"  *ngIf="user?.role == 'students'" name="{{n}}"></mat-radio-button>
+                <mat-radio-button value="{{i.answer4}}"   [hidden]="showResult"  (change)="getAnswer($event)"    color="warn"  *ngIf="user?.role == 'students'  && validExam " name="{{n}}"></mat-radio-button>
                 <label> {{i.answer4}}  (D)</label>
             </div>
         </div>
@@ -35,8 +35,8 @@
 
 
     <div class="text-center" *ngIf="user?.role == 'students'" >
-      <span class="fs-4 test-success" [hidden]="!showResult">{{subject?.questionsArr.length}} / {{total}} </span>
-        <button class="btn btn-success px-5 fs-5"  [hidden]="showResult" (click)="result()"> النتيجة</button>
+      <span class="fs-4 test-success"     *ngIf="showResult || !validExam"    >{{subject?.questionsArr.length}} / {{total}} </span>
+        <button class="btn btn-success px-5 fs-5"   *ngIf="!showResult && validExam"       (click)="result()"> النتيجة</button>
     </div>
 
 </div>

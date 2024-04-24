@@ -8,10 +8,33 @@
         {
           "name": "emm",
           "id": "2",
+          "degree": 1
+        },
+        {
+          "name": "rr",
+          "id": "1",
           "degree": 0
         }
       ],
       "id": 6
+    },
+    {
+      "username": "mekii",
+      "email": "me@gmail.com",
+      "password": "111",
+      "subjectsArr": [
+        {
+          "name": "emm",
+          "id": "2",
+          "degree": 2
+        },
+        {
+          "name": "rr",
+          "id": "1",
+          "degree": 0
+        }
+      ],
+      "id": 7
     }
   ],
   "doctor": [
@@ -62,8 +85,8 @@
   ],
   "login": [
     {
-      "username": "ema",
-      "userId": 6,
+      "username": "mekii",
+      "userId": 7,
       "role": "students",
       "id": 1
     }
